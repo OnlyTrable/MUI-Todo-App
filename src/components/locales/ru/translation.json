@@ -1,0 +1,25 @@
+{
+  "filters": {
+    "all": "Все",
+    "active": "Активные",
+    "completed": "Завершенные"
+  },
+  "todoForm": {
+    "description": "Описание",
+    "descriptionPlaceholder": "Поле 'Описание' не может быть пустым",
+    "date": "Дата",
+    "dateError": "Дата не может быть в прошлом!",
+    "remindMe": "Напомнить мне",
+    "add": "Добавить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "delete": "Удалить"
+  },
+  "searchBar": {
+    "placeholder": "Поиск"
+  },
+  "other": {
+    "headerTitle": "Мои задачи",
+    "noTasks": "Задачи не найдены"
+  }
+}

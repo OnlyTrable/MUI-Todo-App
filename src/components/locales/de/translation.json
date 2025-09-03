@@ -1,0 +1,25 @@
+{
+  "filters": {
+    "all": "Alle",
+    "active": "Aktiv",
+    "completed": "Erledigt"
+  },
+  "todoForm": {
+    "description": "Beschreibung",
+    "descriptionPlaceholder": "Das Feld 'Beschreibung' darf nicht leer sein",
+    "date": "Datum",
+    "dateError": "Datum darf nicht in der Vergangenheit liegen!",
+    "remindMe": "Mich erinnern",
+    "add": "Hinzufügen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen"
+  },
+  "searchBar": {
+    "placeholder": "Suchen"
+  },
+  "other": {
+    "headerTitle": "Meine Aufgaben",
+    "noTasks": "Keine Aufgaben gefunden"
+  }
+}

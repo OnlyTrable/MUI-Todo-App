@@ -1,0 +1,25 @@
+{
+  "filters": {
+    "all": "All",
+    "active": "Active",
+    "completed": "Completed"
+  },
+  "todoForm": {
+    "description": "Description",
+    "descriptionPlaceholder": "The 'Description' field cannot be empty",
+    "date": "Date",
+    "dateError": "Date cannot be in the past!",
+    "remindMe": "Remind me",
+    "add": "Add",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete"
+  },
+  "searchBar": {
+    "placeholder": "Search"
+  },
+  "other": {
+    "headerTitle": "My Tasks",
+    "noTasks": "No tasks found"
+  }
+}

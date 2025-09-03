@@ -1,0 +1,25 @@
+{
+  "filters": {
+    "all": "Всі",
+    "active": "Активні",
+    "completed": "Завершені"
+  },
+  "todoForm": {
+    "description": "Опис",
+    "descriptionPlaceholder": "Поле 'Опис' не може бути порожнім",
+    "date": "Дата",
+    "dateError": "Дата не може бути в минулому!",
+    "remindMe": "Нагадати мені",
+    "add": "Додати",
+    "cancel": "Скасувати",
+    "save": "Зберегти",
+    "delete": "Видалити"
+  },
+  "searchBar": {
+    "placeholder": "Пошук"
+  },
+  "other": {
+    "headerTitle": "Мої завдання",
+    "noTasks": "Завдання не знайдено"
+  }
+}
