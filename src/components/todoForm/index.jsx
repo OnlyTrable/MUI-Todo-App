@@ -118,16 +118,17 @@ function TodoForm({ onAdd, onUpdate, onDelete, todoToEdit, handleClose }){
             {/* 5. Action Buttons */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 {isEditMode && (
-                    <Button
+                    <Button variant="contained" /* стилізація кнопки Видалення */
                         onClick={() => { onDelete(todoToEdit.id); handleClose(); }}
-                        sx={{ color: 'error.main', textTransform: 'none' }}
+                        sx={{ borderRadius: '100px', bgcolor: 'grey.200', color: 'error.main', textTransform: 'none' }}
                     >{t('todoForm.delete')}</Button>
                 )}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, ml: 'auto' }}>
-                    <Button variant="contained" color="primary" type="submit" sx={{ borderRadius: '100px', textTransform: 'none' }}>
+                    
+                    <Button variant="contained" color="primary" type="submit" sx={{ borderRadius: '100px', textTransform: 'none' }}/* стилізація кнопки Додавання/Збереження */>
                         {isEditMode ? t('todoForm.save') : t('todoForm.add')}
                     </Button>
-                    <Button
+                    <Button /* стилізація кнопки Відмови */
                         variant="contained" onClick={handleClose}
                         sx={{
                             textTransform: 'none', borderRadius: '100px', bgcolor: 'grey.200', color: 'primary.main',
