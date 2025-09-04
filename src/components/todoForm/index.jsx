@@ -10,7 +10,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 const textFieldStyles = {
     '& .MuiOutlinedInput-root': {
         height: 56,
-        borderRadius: '4px',
+        borderRadius: '16px',
         '& .MuiOutlinedInput-notchedOutline': {
             borderColor: 'divider',
         },
@@ -102,7 +102,12 @@ function TodoForm({ onAdd, onUpdate, onDelete, todoToEdit, handleClose }){
                 label={t('todoForm.date')}
                 value={date}
                 onChange={(newValue) => { setDate(newValue); setDateError(false); }}
-                sx={textFieldStyles}
+                slotProps={{
+                    textField: {
+                        fullWidth: true,
+                        sx: textFieldStyles,
+                    },
+                }}
             />
             {dateError && (
                 <Alert severity="error">{t('todoForm.dateError')}</Alert>
@@ -118,26 +123,29 @@ function TodoForm({ onAdd, onUpdate, onDelete, todoToEdit, handleClose }){
             {/* 5. Action Buttons */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 {isEditMode && (
-                    <Button variant="contained" /* стилізація кнопки Видалення */
+                    <Button
                         onClick={() => { onDelete(todoToEdit.id); handleClose(); }}
-                        sx={{ borderRadius: '100px', bgcolor: 'grey.200', color: 'error.main', textTransform: 'none' }}
+                        sx={{ color: 'error.main', textTransform: 'none' }}
                     >{t('todoForm.delete')}</Button>
                 )}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, ml: 'auto' }}>
-                    
-                    <Button variant="contained" color="primary" type="submit" sx={{ borderRadius: '100px', textTransform: 'none' }}/* стилізація кнопки Додавання/Збереження */>
+                    <Button variant="contained" color="primary" type="submit" sx={{ borderRadius: '100px', textTransform: 'none' }}>
                         {isEditMode ? t('todoForm.save') : t('todoForm.add')}
                     </Button>
-                    <Button /* стилізація кнопки Відмови */
-                        variant="contained" onClick={handleClose}
+                    <Button
+                        variant="contained"
+                        onClick={handleClose}
                         sx={{
-                            textTransform: 'none', borderRadius: '100px', bgcolor: 'grey.200', color: 'primary.main',
-                            '&:hover': {bgcolor: 'grey.300',},
+                            textTransform: 'none',
+                            borderRadius: '100px',
+                            bgcolor: 'grey.200',
+                            color: 'primary.main',
+                            '&:hover': {
+                                bgcolor: 'grey.300',
+                            },
                         }
                     }
-                    >
-                        {t('todoForm.cancel')}
-                    </Button>
+                    >{t('todoForm.cancel')}</Button>
                 </Box>
             </Box>
             </Stack>

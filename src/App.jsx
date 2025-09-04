@@ -1,13 +1,14 @@
 import * as React from 'react';
 import './App.css';
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { Container, Stack, Box, Button, Modal } from '@mui/material';
+import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles'
+import { Container, Stack, Box, Button, Modal, useMediaQuery, IconButton, Menu, MenuItem } from '@mui/material';
 import Header from './components/header';
 import Filters from './components/filters';
 import SearchBar from './components/searchBar';
 import TodoList from './components/todoList';
 import AddTodoButton from './components/addTodoButton/index.jsx';
 import TodoForm from './components/todoForm/index.jsx';
+import DehazeOutlinedIcon from '@mui/icons-material/DehazeOutlined';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
@@ -70,14 +71,32 @@ const modalStyle = {
   p: 2,
   margin: '0 auto',
   maxWidth: (theme) => theme.breakpoints.values.sm,
+  boxSizing: 'border-box',
 };
 
 function App() {
+  const theme = useTheme();
   const { i18n } = useTranslation();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [searchQuery, setSearchQuery] = React.useState('');
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [editingTodo, setEditingTodo] = React.useState(null);
   const [filter, setFilter] = React.useState('all');
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const isLangMenuOpen = Boolean(anchorEl);
+
+  const handleLangMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleLangMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLanguageChange = (lang) => {
+    i18n.changeLanguage(lang);
+    handleLangMenuClose();
+  };
+
   const [todos, setTodos] = React.useState(() => {
     try {
       const savedTodos = localStorage.getItem('todos');
@@ -170,25 +189,49 @@ function App() {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              '&:hover .lang-switcher': {
-                opacity: 1,
-              }
+              ...(!isMobile && {
+                '&:hover .lang-switcher': {
+                  opacity: 1,
+                }
+              })
             }}>
               <Header />
-              <Box className="lang-switcher" sx={{ display: 'flex', gap: 1, opacity: 0, transition: 'opacity 0.3s ease-in-out' }}>
-                <Button size="small" variant={i18n.language === 'uk' ? 'contained' : 'outlined'} onClick={() => i18n.changeLanguage('uk')}>
-                  UK
-                </Button>
-                <Button size="small" variant={i18n.language === 'ru' ? 'contained' : 'outlined'} onClick={() => i18n.changeLanguage('ru')}>
-                  RU
-                </Button>
-                <Button size="small" variant={i18n.language.startsWith('en') ? 'contained' : 'outlined'} onClick={() => i18n.changeLanguage('en')}>
-                  EN
-                </Button>
-                <Button size="small" variant={i18n.language.startsWith('de') ? 'contained' : 'outlined'} onClick={() => i18n.changeLanguage('de')}>
-                  DE
-                </Button>
-              </Box>
+              {isMobile ? (
+                <>
+                  <IconButton
+                    aria-label="select language"
+                    onClick={handleLangMenuClick}
+                    color="inherit"
+                  >
+                    <DehazeOutlinedIcon />
+                  </IconButton>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={isLangMenuOpen}
+                    onClose={handleLangMenuClose}
+                  >
+                    <MenuItem selected={i18n.language === 'uk'} onClick={() => handleLanguageChange('uk')}>Українська</MenuItem>
+                    <MenuItem selected={i18n.language === 'ru'} onClick={() => handleLanguageChange('ru')}>Русский</MenuItem>
+                    <MenuItem selected={i18n.language.startsWith('en')} onClick={() => handleLanguageChange('en')}>English</MenuItem>
+                    <MenuItem selected={i18n.language.startsWith('de')} onClick={() => handleLanguageChange('de')}>Deutsch</MenuItem>
+                  </Menu>
+                </>
+              ) : (
+                <Box className="lang-switcher" sx={{ display: 'flex', gap: 1, opacity: 0, transition: 'opacity 0.3s ease-in-out' }}>
+                  <Button size="small" variant={i18n.language === 'uk' ? 'contained' : 'outlined'} onClick={() => i18n.changeLanguage('uk')}>
+                    UK
+                  </Button>
+                  <Button size="small" variant={i18n.language === 'ru' ? 'contained' : 'outlined'} onClick={() => i18n.changeLanguage('ru')}>
+                    RU
+                  </Button>
+                  <Button size="small" variant={i18n.language.startsWith('en') ? 'contained' : 'outlined'} onClick={() => i18n.changeLanguage('en')}>
+                    EN
+                  </Button>
+                  <Button size="small" variant={i18n.language.startsWith('de') ? 'contained' : 'outlined'} onClick={() => i18n.changeLanguage('de')}>
+                    DE
+                  </Button>
+                </Box>
+              )}
             </Box>
             <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
             <Filters currentFilter={filter} onFilterChange={setFilter} />
